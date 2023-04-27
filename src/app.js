@@ -140,6 +140,10 @@ saveEditButton.addEventListener('click', () => {
     let quantity = editquantityInput.value;
     let price = editpriceInput.value;
 
+    let fruit ={
+        id:id,
+    }
+
     gyumolcsok.forEach((gyumolcs) => {
         if (gyumolcs.id == id ) {
             gyumolcs.name = name;
@@ -151,3 +155,22 @@ saveEditButton.addEventListener('click', () => {
     generateTbody();
     
 });
+
+function updateFruit(fruit){
+    let endpoint = 'fruits';
+    let url = host + endpoint + "/" + fruit.id;
+    let headers = {
+        "Content-Type":"application/json"
+    }
+
+    fetch(url,{
+        method:'put',
+        body JSON.stringify(fruit),
+        headers:headers
+    })
+    .then(res => res.json())
+    .then(res =>{
+        console.log(res);
+    });
+
+}
